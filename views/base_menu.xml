@@ -1,0 +1,12 @@
+<odoo>
+    <menuitem
+            id="todo_list_root"
+            name="To Do List"
+    />
+
+    <menuitem
+            id="menu_todo_list"
+            name="To-Do"
+            parent="todo_list_root"
+    />
+</odoo>

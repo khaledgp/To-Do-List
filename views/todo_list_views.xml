@@ -1,0 +1,33 @@
+<odoo>
+
+    <record id="view_todo_task_tree" model="ir.ui.view">
+    <field name="name">todo.task.tree</field>
+    <field name="model">todo.task</field>
+    <field name="arch" type="xml">
+        <tree string="All Tasks">
+            <field name="name" string="Task Name"/>
+            <field name="assigned_to" string="Assigned To"/>
+            <field name="due_date" string="Due Date"/>
+            <field name="status" string="Status"/>
+        </tree>
+    </field>
+</record>
+
+
+    <record id="alltasks_action" model="ir.actions.act_window">
+        <field name="name">all tasks action</field>
+        <field name="res_model">todo.task</field>
+    </record>
+
+
+    <menuitem
+    id="alltasks_menu_item"
+    name="All Tasks"
+    parent="menu_todo_list"
+    action="alltasks_action"
+    />
+
+
+
+
+</odoo>
