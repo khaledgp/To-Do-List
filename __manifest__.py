@@ -7,6 +7,7 @@
     'data': [
         'views/base_menu.xml',
         'views/todo_list_views.xml',
+        'security/ir.model.access.csv',
 
     ],
     'application': True,

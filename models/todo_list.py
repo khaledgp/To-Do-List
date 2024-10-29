@@ -5,7 +5,7 @@ class TodoTask(models.Model):
     _description = 'Task for Todo List'
 
     name = fields.Char(string='Task Name', required=True)
-    assigned_to = fields.Many2one('res.users', string='Assigned To', required=True)
+    assigned_to = fields.Many2one('res.partner', string='Assigned To', required=True)
     description = fields.Text(string='Description')
     due_date = fields.Date(string='Due Date')
     status = fields.Selection([
