@@ -9,6 +9,7 @@
             <field name="assigned_to" string="Assigned To"/>
             <field name="due_date" string="Due Date"/>
             <field name="status" string="Status"/>
+            <field name="active"/>
           </tree>
        </field>
     </record>
@@ -20,7 +21,7 @@
         <field name="arch" type="xml">
             <form string="Employee Feedback">
                    <header>
-                        <field name="status" widget="statusbar" statusbar_visible="new, in_progress, completed" options="{'clickable': 1}"/>
+                        <field name="status" widget="statusbar" statusbar_visible="new, in_progress, completed, close" options="{'clickable': 1}"/>
                     </header>
                 <sheet>
 
@@ -28,6 +29,7 @@
                         <field name="name" string="Task Name"/>
                         <field name="assigned_to" string="Assigned To"/>
                         <field name="due_date" string="Due Date"/>
+                        <field name="active"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -66,11 +68,23 @@
     </record>
 
 
+    <record id="todo_close_server_action" model="ir.actions.server">
+        <field name="name">Close Task</field>
+        <field name="model_id" ref="todo_management.model_todo_task"/>
+        <field name="binding_model_id" ref="todo_management.model_todo_task"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_close()
+        </field>
+    </record>
+
+
+
+
     <record id="todo_task_action" model="ir.actions.act_window">
         <field name="name">ToDo Task</field>
         <field name="res_model">todo.task</field>
     </record>
-
 
     <menuitem
     id="all_task_menu_item"

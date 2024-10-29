@@ -12,5 +12,12 @@ class TodoTask(models.Model):
     status = fields.Selection([
         ('new', 'New'),
         ('in_progress', 'In Progress'),
-        ('completed', 'Completed')
+        ('completed', 'Completed'),
+        ('close', 'Close')
     ], string='Status', default='new')
+
+    active = fields.Boolean(default=True)
+
+    def action_close(self):
+        for rec in self:
+            rec.status = 'close'
