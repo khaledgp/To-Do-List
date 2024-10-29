@@ -3,7 +3,7 @@
     'author':'Khaled GP',
     'version': '1.0',
     'category': '',
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
     'data': [
         'views/base_menu.xml',
         'views/todo_list_views.xml',
