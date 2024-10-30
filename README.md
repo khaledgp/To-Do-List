@@ -12,4 +12,3 @@ The ToDo Management Module is designed to streamline task management within the 
 - **Timesheet Integration**: Track time spent on tasks using integrated timesheet functionality.
 - **PDF Reporting**: Generate detailed PDF reports for individual tasks, including timesheet summaries.
 
-git
