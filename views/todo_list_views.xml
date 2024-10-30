@@ -4,12 +4,15 @@
        <field name="name">todo task tree</field>
        <field name="model">todo.task</field>
        <field name="arch" type="xml">
-          <tree string="All Tasks">
+          <tree string="All Tasks" decoration-danger="is_late">
             <field name="name" string="Task Name"/>
             <field name="assigned_to" string="Assigned To"/>
+            <field name="description" string="Description"/>
             <field name="due_date" string="Due Date"/>
+            <field name="estimated_time" string="Estimated Time (hours)"/>
             <field name="status" string="Status"/>
             <field name="active"/>
+              <field name="is_late" invisible="1"/>
           </tree>
        </field>
     </record>
@@ -28,8 +31,20 @@
                     <group>
                         <field name="name" string="Task Name"/>
                         <field name="assigned_to" string="Assigned To"/>
+                        <field name="description" string="Description"/>
                         <field name="due_date" string="Due Date"/>
+                        <field name="estimated_time" string="Estimated Time (hours)"/>
                         <field name="active"/>
+                        <field name="is_late"/>
+                    </group>
+                    <group>
+                        <field name="timesheet_line_ids" context="{'default_task_id': id}">
+                            <tree editable="bottom">
+                                <field name="date" string="Date"/>
+                                <field name="description" string="Description"/>
+                                <field name="hours" string="Hours"/>
+                            </tree>
+                        </field>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -77,6 +92,19 @@
             action = records.action_close()
         </field>
     </record>
+
+
+    <record id="cron_check_overdue_tasks" model="ir.cron">
+        <field name="name">Check Overdue Tasks</field>
+        <field name="model_id" ref="todo_management.model_todo_task"/>
+        <field name="state">code</field>
+        <field name="code">model.check_overdue_tasks()</field>
+        <field name="interval_type">days</field>
+        <field name="interval_number">1</field>
+        <field name="numbercall">-1</field>
+
+    </record>
+
 
 
 

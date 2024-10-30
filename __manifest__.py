@@ -8,6 +8,7 @@
         'views/base_menu.xml',
         'views/todo_list_views.xml',
         'security/ir.model.access.csv',
+        'reports/custom_header_footer.xml',
         'reports/todo_reports.xml',
 
     ],

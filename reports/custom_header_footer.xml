@@ -1,0 +1,12 @@
+<odoo>
+    <template id="custom_header_footer_layout" inherit_id="web.external_layout_standard">
+        <xpath expr="//div[1]" position="replace">
+            <div class="header" style="text-align: center; border-bottom: 1px solid #000; padding-bottom: 10px;">
+                <h2>Company Name</h2>
+                <p>Address Line 1</p>
+                <p>Address Line 2</p>
+                <p>Email: info@company.com | Phone: (123) 456-7890</p>
+            </div>
+        </xpath>
+    </template>
+</odoo>

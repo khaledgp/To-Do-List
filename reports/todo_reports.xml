@@ -8,15 +8,67 @@
         <field name="report_name">todo_management.todo_report_template</field>
     </record>
 
+<odoo>
+    <record id="todo_report" model="ir.actions.report">
+        <field name="name">ToDo Report</field>
+        <field name="model">todo.task</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_todo_task"/>
+        <field name="binding_type">report</field>
+        <field name="report_name">todo_management.todo_report_template</field>
+    </record>
 
     <template id="todo_report_template">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
-                <t t-foreach="docs" t-as="o">
-                    <h1>ToDo report</h1>
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <div class="header" style="text-align: center; border-bottom: 1px solid #000; padding-bottom: 10px;">
+                            <h2>Company Name</h2>
+                            <p>Address Line 1</p>
+                            <p>Address Line 2</p>
+                            <p>Email: info@company.com | Phone: (123) 456-7890</p>
+                        </div>
+
+                        <p><strong>Task Name:</strong> <t t-esc="doc.name"/></p>
+                        <p><strong>Assigned To:</strong> <t t-esc="doc.assigned_to.name if doc.assigned_to else 'N/A'"/></p>
+                        <p><strong>Due Date:</strong> <t t-esc="doc.due_date"/></p>
+                        <p><strong>Estimated Time:</strong> <t t-esc="doc.estimated_time"/> hours</p>
+                        <p><strong>Description:</strong> <t t-esc="doc.description"/></p>
+
+                        <h3>Timesheet</h3>
+                        <table class="table table-condensed" style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid #000; padding: 5px;">Date</th>
+                                    <th style="border: 1px solid #000; padding: 5px;">Description</th>
+                                    <th style="border: 1px solid #000; padding: 5px;">Hours</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.timesheet_line_ids" t-as="line">
+                                    <tr>
+                                        <td style="border: 1px solid #000; padding: 5px;"><t t-esc="line.date"/></td>
+                                        <td style="border: 1px solid #000; padding: 5px;"><t t-esc="line.description"/></td>
+                                        <td style="border: 1px solid #000; padding: 5px;"><t t-esc="line.hours"/></td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="2" style="text-align:right; border-top: 1px solid #000;"><strong>Total Time:</strong></td>
+                                    <td style="border-top: 1px solid #000;"><strong>
+                                        <t t-esc="sum(line.hours for line in doc.timesheet_line_ids)"/>
+                                    </strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="footer" style="text-align: center; margin-top: 20px;">
+                            <p>Page <span t-field="doc.id"/> of <span t-field="doc.id"/></p>
+                        </div>
+                    </div>
                 </t>
             </t>
         </t>
-
     </template>
+</odoo>
 </odoo>
