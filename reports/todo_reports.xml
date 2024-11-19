@@ -8,16 +8,6 @@
         <field name="report_name">todo_management.todo_report_template</field>
     </record>
 
-<odoo>
-    <record id="todo_report" model="ir.actions.report">
-        <field name="name">ToDo Report</field>
-        <field name="model">todo.task</field>
-        <field name="report_type">qweb-pdf</field>
-        <field name="binding_model_id" ref="model_todo_task"/>
-        <field name="binding_type">report</field>
-        <field name="report_name">todo_management.todo_report_template</field>
-    </record>
-
     <template id="todo_report_template">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
@@ -70,5 +60,4 @@
             </t>
         </t>
     </template>
-</odoo>
 </odoo>

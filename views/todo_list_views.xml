@@ -1,10 +1,12 @@
 <odoo>
-
     <record id="todo_task_view_tree" model="ir.ui.view">
        <field name="name">todo task tree</field>
        <field name="model">todo.task</field>
        <field name="arch" type="xml">
           <tree string="All Tasks" decoration-danger="is_late">
+              <header>
+                  <button name="print_xlsx_report" type="object" string="Print Exel" class="btn-primary"/>
+              </header>
             <field name="name" string="Task Name"/>
             <field name="assigned_to" string="Assigned To"/>
             <field name="description" string="Description"/>
@@ -22,13 +24,14 @@
         <field name="name">todo task form</field>
         <field name="model">todo.task</field>
         <field name="arch" type="xml">
-            <form string="Employee Feedback">
+            <form string="To-Do List">
                    <header>
                         <field name="status" widget="statusbar" statusbar_visible="new, in_progress, completed, close" options="{'clickable': 1}"/>
                     </header>
                 <sheet>
 
                     <group>
+                        <field name="ref"/>
                         <field name="name" string="Task Name"/>
                         <field name="assigned_to" string="Assigned To"/>
                         <field name="description" string="Description"/>
@@ -92,6 +95,19 @@
             action = records.action_close()
         </field>
     </record>
+
+
+    <record id="server_action_assign_tasks" model="ir.actions.server">
+        <field name="name">Assign Tasks</field>
+        <field name="model_id" ref="model_todo_task"/>
+        <field name="binding_model_id" ref="todo_management.model_todo_task"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = model.action_assign_tasks_wizard()
+        </field>
+    </record>
+
+
 
 
     <record id="cron_check_overdue_tasks" model="ir.cron">
